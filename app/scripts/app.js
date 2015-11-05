@@ -10,7 +10,7 @@
  */
 angular
   .module('2015blueironhackWeiqingApp', [
-    'ngRoute'
+    'ngRoute','d3'
   ])
   .config(function ($routeProvider) {
     $routeProvider
