@@ -1,0 +1,9 @@
+Currently the website is not working.
+
+Due to time constrains, I just put the google map on it and d3.
+
+I will continue to implement it by importing the data from data.gov and some data from purdue police department.
+
+You could run the application by first do a npm install and bower install to get all the dependencies and then run grunt serve to run the server.
+
+Unit test cases are not written yet.
