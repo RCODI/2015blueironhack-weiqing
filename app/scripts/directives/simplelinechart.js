@@ -84,3 +84,4 @@ angular.module('2015blueironhackWeiqingApp')
         });
       }};
     }]);
+

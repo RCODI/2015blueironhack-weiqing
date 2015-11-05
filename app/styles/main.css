@@ -7,6 +7,7 @@
 
 body {
   padding: 0;
+  height:100%;
 }
 
 /* Everything but the jumbotron gets side spacing for mobile first views */
@@ -19,8 +20,9 @@ body {
 
 /* Custom page header */
 .header {
-  border-bottom: 1px solid #e5e5e5;
+  /*border-bottom: 1px solid #e5e5e5;*/
   margin-bottom: 10px;
+  z-index: 1;
 }
 /* Make the masthead heading the same height as the navigation */
 .header h3 {
@@ -99,4 +101,39 @@ body {
  fill: none;
  stroke: steelblue;
  stroke-width: 1.5px;
+}
+/*
+For google map*/
+.gmap{
+    width:100%;
+}
+.normal-map{
+  height: 450px;
+  margin-bottom:20px;
+}
+
+.mashup-map{
+  position: absolute;
+  left:0;
+  right:0;
+  top:0;
+  bottom: 0;
+  z-index: -1;
+}
+
+.map-widget{
+  position: absolute;
+  left:5%;
+  right:70%;
+  top:50%;
+  bottom: 5%;
+  background-color:#fff;
+}
+
+/* For bootstrap*/
+.container{
+  height:100%;
+}
+.view-container{
+  height:100%;
 }

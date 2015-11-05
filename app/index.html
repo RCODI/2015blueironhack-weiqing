@@ -41,6 +41,7 @@
             <ul class="nav navbar-nav">
               <li class="active"><a href="#/">Home</a></li>
               <li><a ng-href="#/about">About</a></li>
+              <li><a ng-href="#/mashup">Mashup</a></li>
               <li><a ng-href="#/">Contact</a></li>
             </ul>
           </div>
@@ -49,14 +50,14 @@
     </div>
 
     <div class="container">
-    <div ng-view=""></div>
+    <div class="view-container" ng-view=""></div>
     </div>
 
-    <div class="footer">
+    <!-- <div class="footer">
       <div class="container">
         <p><span class="glyphicon glyphicon-heart"></span> from the Yeoman team</p>
       </div>
-    </div>
+    </div> -->
 
 
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
@@ -70,8 +71,7 @@
        ga('send', 'pageview');
     </script>
     <!-- Include google map api here -->
-    <script type ="text/javascript" src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=places"></script>
-   
+    <script src="http://maps.googleapis.com/maps/api/js"></script>
     <!-- build:js(.) scripts/vendor.js -->
     <!-- bower:js -->
     <script src="bower_components/jquery/dist/jquery.js"></script>
@@ -88,6 +88,10 @@
         <script src="scripts/controllers/about.js"></script>
         <script src="scripts/services/d3service.js"></script>
         <script src="scripts/directives/simplelinechart.js"></script>
+        <script src="scripts/directives/simplemap.js"></script>
+        <script src="scripts/controllers/mashup.js"></script>
+        <script src="scripts/directives/mapwidget.js"></script>
+        <script src="scripts/services/mapservice.js"></script>
         <!-- endbuild -->
 </body>
 </html>
