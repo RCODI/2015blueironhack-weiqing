@@ -20,7 +20,8 @@ angular.module('2015blueironhackWeiqingApp')
                 center: new google.maps.LatLng(40.43, -86.92),
                 mapTypeId: google.maps.MapTypeId.ROADMAP
             };
-            var map = new google.maps.Map(document.getElementById(attrs.id), myOptions);
+            var map = mapService.initmap(attrs.id, myOptions);
+            mapService.createMarker("asas", 40.43, -86.92, "test");
             
         }
     };
