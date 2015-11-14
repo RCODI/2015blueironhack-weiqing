@@ -1,5 +1,5 @@
 'use strict';
-
+/*global google*/
 /**
  * @ngdoc directive
  * @name 2015blueironhackWeiqingApp.directive:simplemap
@@ -22,8 +22,8 @@ angular.module('2015blueironhackWeiqingApp')
             };
             var map = mapService.initmap(attrs.id, myOptions);
             //mapService.geocodeAddress("purdue police department west lafayette","police department");
-            mapService.geocodeAddress("451 N Grant St.", "Home");
-            mapService.showPoliceDept(40.43, -86.92);
+            mapService.geocodeAddress('451 N Grant St. West Lafayette', 'Home');
+            //mapService.showPoliceDept(40.43, -86.92);
         }
     };
   }]);

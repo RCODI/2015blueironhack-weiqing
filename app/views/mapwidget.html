@@ -1,21 +1,13 @@
 <div class="map-widget panel">Put some ui widget here...
 <div class="checkbox">
 	<input type="text" placeholder="search here...">
-    <label>
-      <input type="checkbox"> Factor 1
-    </label><br>
-    <label>
-      <input type="checkbox"> Factor 2
-    </label><br>
-    <label>
-      <input type="checkbox"> Factor 3
-    </label><br>
-    <label>
-      <input type="checkbox"> Factor 4
-    </label><br>
-    <label>
-      <input type="checkbox"> Factor 5
-    </label><br>
+  <ul>
+    <li ng-repeat="factor in widgetFactorList">
+      <label>
+        <input type="checkbox" ng-click="toggleMarker(factor)">{{factor.name}}
+      </label><br>
+    </li>
+  </ul>
   </div>
 
 </div>
