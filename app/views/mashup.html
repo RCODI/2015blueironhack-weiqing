@@ -1,5 +1,6 @@
 
 <div class="container" ng-controller="MashupCtrl as mashupCtrl">
+<span ng-class="{'spinner-active':spinneractive}" us-spinner="{color: '#000', radius:30, width:8, length: 16}" spinner-key="map-spinner"></span>
 <div simple-map class="gmap mashup-map" id="map_canvas"></div>
 <map-widget></map-widget>
 </div>

@@ -7,7 +7,7 @@
  * # mapWidget
  */
 angular.module('2015blueironhackWeiqingApp')
-  .directive('mapWidget', function (d3Service, mapService) {
+  .directive('mapWidget', function (d3Service, mapService, usSpinnerService) {
     return {
       templateUrl: 'views/mapwidget.html',
       restrict: 'EA',
@@ -27,7 +27,18 @@ angular.module('2015blueironhackWeiqingApp')
 	  	$scope.toggleMarker = function(factor){
         	
         	if (!factor.toggle) {
-        		mapService.showPlaces(40.43, -86.92, factor.markers, factor.value);
+        		//set spinner
+        		usSpinnerService.spin('map-spinner');
+        		$scope.spinneractive = true;
+        		//callback for deferred promise
+        		var promise = mapService.showPlaces(40.43, -86.92, factor.markers, factor.value);
+        		promise.then(function(res){
+        			usSpinnerService.stop('map-spinner');
+        			$scope.spinneractive = false;
+        		}, function(error){
+        			usSpinnerService.stop('map-spinner');
+        			$scope.spinneractive = false;
+        		});
         	}
         	else {
         		mapService.clearMarkers(factor.markers);

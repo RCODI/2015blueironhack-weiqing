@@ -8,7 +8,7 @@
  * Service in the 2015blueironhackWeiqingApp.
  */
 angular.module('2015blueironhackWeiqingApp')
-  .factory('mapService', function (dataConfig) {
+  .factory('mapService', function ($q, dataConfig) {
   	var service = {};
 
     var map;
@@ -90,6 +90,8 @@ angular.module('2015blueironhackWeiqingApp')
 	};
 	
   	service.showPlaces = function(lat, lng, markers, type){
+        var deffered = $q.defer();
+
   		searchPlaces.radarSearch({
 		    bounds: new google.maps.LatLngBounds(
                 new google.maps.LatLng(lat-0.1, lng-0.1),
@@ -101,8 +103,14 @@ angular.module('2015blueironhackWeiqingApp')
 		    for (var i = 0; i < results.length; i++) {
 		      service.createCustomMarker(results[i], markers, type);
 		    }
+            deffered.resolve('good');
 		  }
+          else {
+            deffered.reject('error');
+          }
 		});
+
+        return deffered.promise;
   	};
 
 	 service.geocodeAddress = function(address, headerdesp) {
