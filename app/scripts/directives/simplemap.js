@@ -1,5 +1,5 @@
 'use strict';
-/*global google*/
+/*global google, address*/
 /**
  * @ngdoc directive
  * @name 2015blueironhackWeiqingApp.directive:simplemap
@@ -7,7 +7,7 @@
  * # simplemap
  */
 angular.module('2015blueironhackWeiqingApp')
-  .directive('simpleMap', ['d3Service','mapService', function (d3Service, mapService) {
+  .directive('simpleMap', ['d3Service','mapService','dataConfig', '$timeout', function (d3Service, mapService, dataConfig, $timeout) {
     return {
         restrict: 'EA',
         replace: true,
@@ -22,8 +22,19 @@ angular.module('2015blueironhackWeiqingApp')
             };
             var map = mapService.initmap(attrs.id, myOptions);
             //mapService.geocodeAddress("purdue police department west lafayette","police department");
-            mapService.geocodeAddress('451 N Grant St. West Lafayette', 'Home');
             //mapService.showPoliceDept(40.43, -86.92);
+            var q = dataConfig.getAptData();
+
+            q.then(function(aptJson){
+                for (var i = 0; i < aptJson.length; i ++) {
+                    mapService.createMarker(aptJson[i].address,aptJson[i].lat, aptJson[i].lng, aptJson[i], 'home-2.png', 100, 'apartment');
+                }
+
+            }, function(){});
+            //console.log(map);
+            dataConfig.getCrimeData();
+            dataConfig.getClimateDataTypes();
+            
         }
     };
   }]);

@@ -10,7 +10,7 @@
  */
 angular
   .module('2015blueironhackWeiqingApp', [
-    'ngRoute','d3','angularSpinner'
+    'ngRoute','d3','angularSpinner', 'ngPlacesAutocomplete'
   ])
   .config(function ($routeProvider) {
     $routeProvider

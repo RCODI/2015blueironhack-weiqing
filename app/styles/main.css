@@ -116,17 +116,17 @@ For google map*/
   position: absolute;
   left:0;
   right:0;
-  top:0;
+  top:50px;
   bottom: 0;
   z-index: -1;
 }
 
 .map-widget{
   position: absolute;
-  left:5%;
+  left:0;
   right:70%;
-  top:50%;
-  bottom: 5%;
+  top:50px;
+  bottom: -20px;
   background-color:#fff;
 }
 
@@ -137,6 +137,9 @@ For google map*/
 .view-container{
   height:100%;
 }
+.checkbox{
+  padding: 10px;
+}
 
 /*Spinner*/
 .spinner-active{
@@ -146,7 +149,7 @@ For google map*/
   bottom:0;
   right:0;
   left:0;
-  opacity:0.7;
+  opacity:0.5;
   z-index:1;
 }
 

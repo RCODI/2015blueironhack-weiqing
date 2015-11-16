@@ -1,6 +1,16 @@
 <div class="map-widget panel">Put some ui widget here...
 <div class="checkbox">
-	<input type="text" placeholder="search here...">
+  <form>
+    <input  type="text" 
+        ng-model="queryName"
+        ng-places-autocomplete 
+        pa-options="paOptions" 
+        pa-on-place-ready="searchPlace"
+        placeholder="search a place here..."
+        class="form-control"
+/> 
+  </form>
+  <br>
   <ul>
     <li ng-repeat="factor in widgetFactorList">
       <label>
