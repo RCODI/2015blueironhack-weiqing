@@ -1,0 +1,24 @@
+1. Name of your Application
+ApartmentFinder
+
+2. Keywords
+renting, crime, safety, restaurant, park, weather, school
+
+
+3. Brief Description
+I developped a integrated map app to help user find future apartments. The main interface is divided into two panels. Left one is the detail panel and the right one is the google map. I mainly used angularjs as the framework, google map and d3 are used for visualization. Underscore.js is used for simplify js functions. User can search the apartment rent price with certain range and toggle crime incidences and crime heat map in the tab 'tool' on the left panel, also user can toggle restaurants, parks, schools, hospitals, police stations and etc on the map. Bootstrap is used for UI. I will include climate data in next round.
+
+
+4. Test Case
+Chrome, Safari, and Firefox
+
+5. Build Case
+First do npm install, then do a bower install then do a grunt serve.
+If warning exsits, use grunt serve --force
+Dependencies: python, nodejs, grunt, grunt-cli, bower
+
+6. Description of the Datasets Used
+http://crimereports.com
+http://boilerapartments.com
+
+python codes in the directory is for crawling a website
