@@ -21,6 +21,7 @@
     <![endif]-->
 
     <!-- Add your site or application content here -->
+    <!--
     <div class="header">
       <div class="navbar navbar-default" role="navigation">
         <div class="container">
@@ -48,10 +49,10 @@
         </div>
       </div>
     </div>
-
-    <div class="container">
+  -->
+    
     <div class="view-container" ng-view=""></div>
-    </div>
+    
 
     <!-- <div class="footer">
       <div class="container">
@@ -70,8 +71,8 @@
        ga('create', 'UA-XXXXX-X');
        ga('send', 'pageview');
     </script>
-    <!-- Include google map api here -->
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCdl8YQDKfUE3XU0aeLcJACJAVxDYL04Ss&libraries=places" async defer></script>
+    <!-- Include google map api here
+    <script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyCdl8YQDKfUE3XU0aeLcJACJAVxDYL04Ss&libraries=places,visualization" async defer></script> -->
     <!-- build:js(.) scripts/vendor.js -->
     <!-- bower:js -->
     <script src="bower_components/jquery/dist/jquery.js"></script>
@@ -82,7 +83,6 @@
     <script src="bower_components/underscore/underscore.js"></script>
     <script src="bower_components/spin.js/spin.js"></script>
     <script src="bower_components/angular-spinner/angular-spinner.js"></script>
-    <script src="bower_components/ngPlacesAutocomplete/ngPlacesAutocomplete.min.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 
@@ -98,6 +98,10 @@
         <script src="scripts/services/mapservice.js"></script>
         <script src="scripts/services/dataconfig.js"></script>
         <script src="scripts/directives/ngenter.js"></script>
+        <script src="scripts/services/mapinitializer.js"></script>
+        <script src="scripts/directives/ngplacesautocomplete.js"></script>
+        <script src="scripts/directives/showtab.js"></script>
         <!-- endbuild -->
+    
 </body>
 </html>

@@ -26,9 +26,10 @@ angular.module('2015blueironhackWeiqingApp')
     while(new Date().getTime() < now + sleepDuration){ /* do nothing */ } 
 	};
 	
-	this.getCrimeData = function(){
+	this.getCrimeData = function(_month){
 		var deffered = $q.defer();
-    	$http.get('data/crime.json')
+		var month = !!_month ? '_'+_month:'';
+    	$http.get('data/crime'+month+'.json')
 	       .then(function(res){
 	       		deffered.resolve(res.data);            
 	    }, function(){

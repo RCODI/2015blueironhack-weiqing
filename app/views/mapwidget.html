@@ -1,5 +1,43 @@
-<div class="map-widget panel">Put some ui widget here...
-<div class="checkbox">
+<div class="map-widget">
+<ul class="nav nav-tabs map-widget-fixed">
+  <li class="active"><a showtab="" href="#list">Apartment List</a></li>
+  <li><a showtab="" href="#tools">Tools</a></li>
+</ul>
+
+<div id="list" class="checkbox tab-pane fade in active">
+  <h5>Min-Max Rent</h5>
+  $<input type="text" ng-change="refineList('price')" ng-model="rentMin" />-$<input type="text" ng-model="rentMax" ng-change="refineList('price')"/>
+  <!--<a ng-click="refineList('price')" class="" href="javascript:void(0);">Refine Results</a>-->
+  <ul id="apt-list">
+    <li class="apt-li" ng-repeat="apt in aptList" ng-mouseenter="hover(apt)">
+      <div class="apt-box" ng-if="!apt.hide">
+        <div class="apt-body">
+          <h4><b> <a href='{{apt.link }}' target=\'_blank\'>{{apt.address}}</b></a></h4>
+          <span style="color:#777">{{apt.bedroom}} • {{apt.bath}} • {{apt.area }} </span>
+          <h3 class="rent">{{apt.rent}}/mo</h3>
+          <h6 class="header1" > Link:  <a href='{{apt.link }}' target=\'_blank\'> {{apt.link}}  </a></h6> 
+
+          <a ng-if="!apt.expand" ng-click="hoverIn(apt)" href="javascript:void(0);">Show More</a>
+          
+          
+          <div ng-if="apt.expand">
+            Detail Scores:
+            <div id="d3-svg-chart-{{$index}}">
+              <div simple-line-chart score="apt.score" identifier="$index"></div> 
+            </div>
+
+          </div>
+
+          <a ng-if="apt.expand" ng-click="hoverOut(apt)" href="javascript:void(0);">Hide</a>  
+        </div>
+      </div>
+    </li>
+  </ul>
+</div>
+
+
+<div id="tools" class="checkbox tab-pane fade">
+  <br>
   <form>
     <input  type="text" 
         ng-model="queryName"
@@ -8,9 +46,27 @@
         pa-on-place-ready="searchPlace"
         placeholder="search a place here..."
         class="form-control"
-/> 
+    /> 
   </form>
-  <br>
+  <hr>
+  <h5>Heatmap</h5>
+  <ul>
+    <li>
+    <input  type="checkbox" ng-click="showHeatMap()">Show Crime Heatmap
+    </li>
+  </ul>
+  <hr>
+    <h5>Show Crime Incidences</h5>
+  <ul>
+    
+    <li ng-repeat="factor in crimeMonthList">
+      <label>
+        <input type="checkbox" ng-click="toggleMarker(factor, factor.abbr)">{{factor.name}} {{factor.markers.length}}
+      </label><br>
+    </li>
+  </ul>
+  <hr>
+  <h5>Other Factors</h5>
   <ul>
     <li ng-repeat="factor in widgetFactorList">
       <label>

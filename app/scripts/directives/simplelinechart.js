@@ -1,5 +1,5 @@
 'use strict';
-
+// jscs:disable
 /**
  * @ngdoc directive
  * @name 2015blueironhackWeiqingApp.directive:simpleLineChart
@@ -10,77 +10,97 @@ angular.module('2015blueironhackWeiqingApp')
 .directive('simpleLineChart', ['d3Service', function(d3Service) {
     return {
       restrict: 'EA',
-      scope: {},
+      scope: {
+        score: '=',
+        identifier:'='
+      },
       link: function(scope, element, attrs) {
         d3Service.d3().then(function(d3) {
 
-          var margin = {top: 20, right: 20, bottom: 30, left: 50},
-            width = 600 - margin.left - margin.right,
-            height = 700 - margin.top - margin.bottom;
+          var width = 300,
+    height = 300,
+    radius = Math.min(width, height) / 2,
+    innerRadius = 0.3 * radius;
 
-          var parseDate = d3.time.format('%d-%b-%y').parse;
+var pie = d3.layout.pie()
+    .sort(null)
+    .value(function(d) { return d.width; });
 
-          var x = d3.time.scale()
-            .range([0, width]);
+var tip = d3.tip()
+  .attr('class', 'd3-tip')
+  .offset([0, 0])
+  .html(function(d) {
+    return d.data.label + ": <span style='color:orangered'>" + d.data.score + "</span>";
+  });
 
-          var y = d3.scale.linear()
-            .range([height, 0]);
+var arc = d3.svg.arc()
+  .innerRadius(innerRadius)
+  .outerRadius(function (d) { 
+    return (radius - innerRadius) * (d.data.score / 100.0) + innerRadius; 
+  });
 
-          var xAxis = d3.svg.axis()
-            .scale(x)
-            .orient('bottom');
+var outlineArc = d3.svg.arc()
+        .innerRadius(innerRadius)
+        .outerRadius(radius);
 
-          var yAxis = d3.svg.axis()
-            .scale(y)
-            .orient('left');
+var svg = d3.select("#d3-svg-chart-"+scope.identifier).append("svg")
+    .attr("width", width)
+    .attr("height", height)
+    .append("g")
+    .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
 
-          var line = d3.svg.line()
-            .x(function(d) { return x(d.date); })
-            .y(function(d) { return y(d.close); });
+svg.call(tip);
 
-          var svg = d3.select(element[0]).append('svg')
-           .attr('width', width + margin.left + margin.right)
-           .attr('height', height + margin.top + margin.bottom)
-           .append('g')
-           .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
+d3.csv('data/aster_data.csv', function(error, data) {
 
-          // Hard coded data
-          scope.data = [
-            {date: '4-Apr-12', close: 34},
-            {date: '5-Apr-12', close: 45},
-            {date: '6-Apr-12', close: 37},
-            {date: '7-Apr-12', close: 56},
-            {date: '8-Apr-12', close: 50},
-            {date: '9-Apr-12', close: 77}
-          ];
+  data.forEach(function(d) {
+    d.id     =  d.id;
+    d.order  = +d.order;
+    d.color  =  d.color;
+    d.weight = +d.weight;
+    d.score  = +Math.floor(Math.random()*100);
+    d.width  = +d.weight;
+    d.label  =  d.label;
+  });
+  // for (var i = 0; i < data.score; i++) { console.log(data[i].id) }
+  
+  var path = svg.selectAll(".solidArc")
+      .data(pie(data))
+    .enter().append("path")
+      .attr("fill", function(d) { return d.data.color; })
+      .attr("class", "solidArc")
+      .attr("stroke", "gray")
+      .attr("d", arc)
+      .on('mouseover', tip.show)
+      .on('mouseout', tip.hide);
 
-          scope.data.forEach(function(d) {
-            d.date = parseDate(d.date);
-            d.close = +d.close;
-          });
+  var outerPath = svg.selectAll(".outlineArc")
+      .data(pie(data))
+    .enter().append("path")
+      .attr("fill", "none")
+      .attr("stroke", "gray")
+      .attr("class", "outlineArc")
+      .attr("d", outlineArc);  
 
-          x.domain(d3.extent(scope.data, function(d) { return d.date; }));
-          y.domain(d3.extent(scope.data, function(d) { return d.close; }));
 
-          svg.append('g')
-            .attr('class', 'x axis')
-            .attr('transform', 'translate(0,' + height + ')')
-            .call(xAxis);
+  // calculate the weighted mean score
+  var score = 
+    data.reduce(function(a, b) {
+      //console.log('a:' + a + ', b.score: ' + b.score + ', b.weight: ' + b.weight);
+      return a + (b.score * b.weight); 
+    }, 0) / 
+    data.reduce(function(a, b) { 
+      return a + b.weight; 
+    }, 0);
 
-          svg.append('g')
-            .attr('class', 'y axis')
-            .call(yAxis)
-            .append('text')
-            .attr('transform', 'rotate(-90)')
-            .attr('y', 6)
-            .attr('dy', '.71em')
-            .style('text-anchor', 'end')
-            .text('Price ($)');
 
-          svg.append('path')
-            .datum(scope.data)
-            .attr('class', 'line')
-            .attr('d', line);
+  svg.append("svg:text")
+    .attr("class", "aster-score")
+    .attr("dy", ".35em")
+    .attr("text-anchor", "middle") // text-align: right
+    .text(Math.round(score));
+
+});
         });
       }};
     }]);

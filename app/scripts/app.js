@@ -10,12 +10,12 @@
  */
 angular
   .module('2015blueironhackWeiqingApp', [
-    'ngRoute','d3','angularSpinner', 'ngPlacesAutocomplete'
+    'ngRoute','d3','angularSpinner',
   ])
   .config(function ($routeProvider) {
     $routeProvider
       .when('/', {
-        templateUrl: 'views/main.html',
+        templateUrl: 'views/mashup.html',
         controller: 'MainCtrl',
         controllerAs: 'main'
       })

@@ -10,9 +10,31 @@
 angular.module('d3', [])
   .factory('d3Service', ['$document', '$q', '$rootScope', function($document, $q, $rootScope) {
     var d = $q.defer();
+
+    var loadScript = function(url, callback)
+        {
+            // Adding the script tag to the head as suggested before
+            var head = document.getElementsByTagName('head')[0];
+            var script = document.createElement('script');
+            script.type = 'text/javascript';
+            script.src = url;
+
+            // Then bind the event to the callback function.
+            // There are several events for cross browser compatibility.
+            script.onreadystatechange = callback;
+            script.onload = callback;
+
+            // Fire the loading
+            head.appendChild(script);
+        };
+
     function onScriptLoad() {
       // Load client in the browser
-      $rootScope.$apply(function() { d.resolve(window.d3); });
+      var d3TipLib = 'http://labratrevenge.com/d3-tip/javascripts/d3.tip.v0.6.3.js';
+        loadScript(d3TipLib, function(){
+          $rootScope.$apply(function() { d.resolve(window.d3); });
+        });
+      
     }
     // Create a script tag with d3 as the source
     // and call our onScriptLoad callback when it

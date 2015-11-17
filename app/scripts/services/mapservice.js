@@ -1,5 +1,5 @@
 'use strict';
-/*global google, alert, bedroom, rent, bath, area, address  */
+/*global google, alert, bedroom, rent, bath, area, address, MarkerWithLabel  */
 /**
  * @ngdoc service
  * @name 2015blueironhackWeiqingApp.mapService
@@ -13,9 +13,9 @@ angular.module('2015blueironhackWeiqingApp')
 
     var map;
             
-    var infowindow = new google.maps.InfoWindow();
+    var infowindow;
 
-    var geocoder = new google.maps.Geocoder(); 
+    var geocoder; 
   	
     var searchPlaces;
 
@@ -28,29 +28,37 @@ angular.module('2015blueironhackWeiqingApp')
         markers[i].setMap(map);
       }
     }
-    
 
     // AngularJS will instantiate a singleton by calling "new" on this function
-    service.createMarker = function(address,lat,lng,headMarker,iconImage,zIndex,type, _markers) {
+    service.createMarker = function(address,lat,lng,headMarker,iconImage,zIndex,type, _markers, label) {
 	    var contentString = address;
         var iconUrl = null;
         if (!!iconImage) {
             iconUrl = iconBase + iconImage;
         }
         var marker;
+        var markerOption = {
+            position: new google.maps.LatLng(lat,lng),
+            map: map,
+            };
+
         //animation: google.maps.Animation.DROP,
         if (!!iconUrl) {
-            marker = new google.maps.Marker({
-            position: new google.maps.LatLng(lat,lng),
-            map: map,
-            icon: iconUrl,
-            zIndex: zIndex
-            });
-        } else {
-            marker = new google.maps.Marker({
-            position: new google.maps.LatLng(lat,lng),
-            map: map,
-            });
+            markerOption.icon = iconUrl;
+        } 
+        if (!!zIndex) {
+            markerOption.zIndex = zIndex;
+        }
+        if (!!label) {
+            markerOption.labelAnchor = new google.maps.Point(22, -5);
+            markerOption.labelClass = 'map-label'; // the CSS class for the label
+            markerOption.labelStyle = {opacity: 1};
+            markerOption.labelContent = label;
+            marker = new MarkerWithLabel(markerOption);
+
+        }else {
+            marker = new google.maps.Marker(markerOption);
+         
         }
 	    
         if(!!_markers) {
@@ -59,33 +67,45 @@ angular.module('2015blueironhackWeiqingApp')
         else{
             markers.push(marker);
         }
+
+        var infoContent = '';
+
         if (type === 'apartment') {
-    	  	google.maps.event.addListener(marker, 'click', function() {
-    		     infowindow.setContent('<h6 class="header1"> ' + address + '</h6>' + 
-    		    '<h6 class="header1" >' + headMarker.bedroom + ' ' + headMarker.bath + '</h6>' +
-    		    '<h6 class="header1" > Rent: ' + headMarker.rent + '</h6>'+ 
+            infoContent = '<h6 class="header1"> ' + address + ' - ' + headMarker.rent + '</h6>' + 
+                '<h6 class="header1" >' + headMarker.bedroom + ' ' + headMarker.bath + '</h6>' +
+                //'<h6 class="header1" > Rent: ' + headMarker.rent + '</h6>'+ 
                 '<h6 class="header1" > Area: ' + headMarker.area + '</h6>'+ 
-                '<h6 class="header1" > Link: ' + '<a href=\'' + headMarker.link +' \' target=\'_blank\'>' + headMarker.link + '</a></h6>');
-    		     infowindow.open(map,marker);
+                //'<h6 class="header1" > Link: ' + '<a href=\'' + headMarker.link +' \' target=\'_blank\'>' + headMarker.link + '</a></h6>'
+                '';
+
+    	  	google.maps.event.addListener(marker, 'click', function() {
+    		     infowindow.setContent(infoContent);
+                 infowindow.open(map,marker);
     		     infowindow.maxWidth=200;
     	   	});
         }
         else if (type === 'crime') {
+            infoContent = '<h6 class="header1"> ' + headMarker.address + '</h6>' + 
+                '<h6 class="header1" >' + headMarker.type + '</h6>' +
+                '<h6 class="header1" > Date: ' + headMarker.date + '</h6>'+ 
+                '<h6 class="header1" > Department: ' + headMarker.dept + '</h6>';
+
             google.maps.event.addListener(marker, 'click', function() {
-                 infowindow.setContent('<h6 class="header1"> ' + headMarker.Address + '</h6>' + 
-                '<h6 class="header1" >' + headMarker.Type + '</h6>' +
-                '<h6 class="header1" > Date: ' + headMarker.Date + '</h6>'+ 
-                '<h6 class="header1" > Department: ' + headMarker.dept + '</h6>');
+                 infowindow.setContent(infoContent);
                  infowindow.open(map,marker);
                  infowindow.maxWidth=200;
             }); 
         }
         else {
+            infoContent = address;
+
             google.maps.event.addListener(marker, 'click', function() {
                 infowindow.setContent(address);
                 infowindow.open(map, marker);
             });
         }
+
+        return {marker:marker, infoContent: infoContent};
 	};
 
     service.clearMarkers = function(_markers){
@@ -180,7 +200,7 @@ angular.module('2015blueironhackWeiqingApp')
 		        	var p = results[i].geometry.location;
 			        var lat=p.lat();
 			        var lng=p.lng();
-			        service.createMarker(address,lat,lng,headerdesp, null, null, null, _markers);
+			        service.createMarker(address,lat,lng,headerdesp, null, 101, null, _markers);
 		        }
 		        //console.log(results);
                 index ++;
@@ -201,8 +221,11 @@ angular.module('2015blueironhackWeiqingApp')
 
 	 service.initmap = function(id, myOptions){
 	 	map = new google.maps.Map(document.getElementById(id), myOptions);
-        map.setOptions({styles: dataConfig.getMapStyle()});
+        //map.setOptions({styles: dataConfig.getMapStyle()});
 	 	searchPlaces = new google.maps.places.PlacesService(map);
+        infowindow = new google.maps.InfoWindow();
+
+        geocoder = new google.maps.Geocoder(); 
         return map;
 	 };
 
@@ -213,6 +236,10 @@ angular.module('2015blueironhackWeiqingApp')
 	 service.getmap = function(){
 	 	return map;
 	 };
+
+     service.getInfoWindow = function(){
+        return infowindow;
+     };
 
 	 return service;
 
