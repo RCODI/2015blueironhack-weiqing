@@ -12,6 +12,7 @@ angular.module('2015blueironhackWeiqingApp')
       restrict: 'EA',
       scope: {
         score: '=',
+        weight: '=',
         identifier:'='
       },
       link: function(scope, element, attrs) {
@@ -57,8 +58,8 @@ d3.csv('data/aster_data.csv', function(error, data) {
     d.id     =  d.id;
     d.order  = +d.order;
     d.color  =  d.color;
-    d.weight = +d.weight;
-    d.score  = +Math.floor(Math.random()*100);
+    d.weight = +scope.weight[d.id];
+    d.score  = +scope.score[d.id];
     d.width  = +d.weight;
     d.label  =  d.label;
   });

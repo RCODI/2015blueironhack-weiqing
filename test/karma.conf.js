@@ -30,6 +30,11 @@ module.exports = function(config) {
       'bower_components/underscore/underscore.js',
       'bower_components/spin.js/spin.js',
       'bower_components/angular-spinner/angular-spinner.js',
+      'bower_components/angularjs-slider/dist/rzslider.js',
+      'bower_components/angular-dropdowns/dist/angular-dropdowns.js',
+      'bower_components/angular-tooltips/dist/angular-tooltips.min.js',
+      'bower_components/Chart.js/Chart.js',
+      'bower_components/angular-chart.js/dist/angular-chart.js',
       'bower_components/angular-mocks/angular-mocks.js',
       // endbower
       "app/scripts/**/*.js",

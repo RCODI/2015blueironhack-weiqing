@@ -221,6 +221,12 @@ For google map*/
   font-family: "Open Sans", open-sans, Arial, "Helvetica Neue", sans-serif;
 }
 
+.apt-size{
+  font-size: 14px;
+  font-weight: bold;
+  color: #82888a;
+}
+
 
 .axis path,
 .axis line {
@@ -233,6 +239,96 @@ For google map*/
   fill: orange;
 }
 
+.histogram {
+      margin-bottom: -35px;
+      text-align: right;
+}
+
+.histogram span {
+        margin-right: 0px;
+        font-size: 0;
+        display: inline-block;
+        vertical-align: bottom;
+        background: rgba(156, 162, 153, 0.5);
+}
+.custom-slider {
+  margin-bottom: 40px;
+}
+
+.custom-slider .rz-bubble{
+  bottom:-36px;
+}
+
+.custom-slider .rz-pointer{
+  border: 1px solid #aaa;
+  background: #fff;
+  border-radius: 100%;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  height: 24px;
+  outline: none;
+  position: absolute;
+  z-index: 2;
+  width: 24px;
+  top:-10px;
+}
+
+.custom-slider .rz-active{
+  background: #fff;
+}
+.custom-slider .rz-active:after{
+  background: #fff;
+}
+
+.custom-slider-factor {
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+
+.custom-slider-factor .rz-bubble{
+  display: none;
+}
+
+.sort-type-list{
+  margin-top: 15px;
+}
+
+
+.widget-dropdown{
+  color:#777;
+  display: inline-block;
+  width:45%;
+  
+  margin-right: 2%;
+}
+
+.widget-dropdown:after{
+  margin-left: 15px;
+  right: 5%;
+  border-color: #888 transparent;
+}
+
+.widget-dropdown .dropdown{
+  z-index: 5;
+}
+
+.widget-dropdown .dropdown li a{
+  color:#777;
+}
+.apt-box{
+  cursor: pointer;
+}
+.apt-size{
+  margin-top: 5px;
+  margin-bottom: -15px;
+}
+.factor-name{
+  margin-bottom:-20px;
+}
+.chart-custom{
+  width:100%;
+  height:400px;
+}
 .solidArc:hover {
   fill: orangered ;
 }

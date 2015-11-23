@@ -26,11 +26,14 @@ angular.module('2015blueironhackWeiqingApp')
     function setMapOnMarkers(map, markers) {
       for (var i = 0; i < markers.length; i++) {
         markers[i].setMap(map);
+        if (!!markers[i].circleBinded) {
+            markers[i].circleBinded.setMap(map);
+        }
       }
     }
 
     // AngularJS will instantiate a singleton by calling "new" on this function
-    service.createMarker = function(address,lat,lng,headMarker,iconImage,zIndex,type, _markers, label) {
+    service.createMarker = function(address,lat,lng,headMarker,iconImage,zIndex,type, _markers, label, circle) {
 	    var contentString = address;
         var iconUrl = null;
         if (!!iconImage) {
@@ -60,6 +63,13 @@ angular.module('2015blueironhackWeiqingApp')
             marker = new google.maps.Marker(markerOption);
          
         }
+
+        if (!!circle) {
+            circle.bindTo('center', marker, 'position');
+            marker.circleBinded = circle;
+            map.setZoom(14);
+            map.setCenter(marker.getPosition());
+        }
 	    
         if(!!_markers) {
             _markers.push(marker);
@@ -71,7 +81,7 @@ angular.module('2015blueironhackWeiqingApp')
         var infoContent = '';
 
         if (type === 'apartment') {
-            infoContent = '<h6 class="header1"> ' + address + ' - ' + headMarker.rent + '</h6>' + 
+            infoContent = '<h6 class="header1"> ' + '<a href=' + headMarker.link + ' target=\'_blank\'>' + address + '</a> ' + headMarker.rent + '</h6>' + 
                 '<h6 class="header1" >' + headMarker.bedroom + ' ' + headMarker.bath + '</h6>' +
                 //'<h6 class="header1" > Rent: ' + headMarker.rent + '</h6>'+ 
                 '<h6 class="header1" > Area: ' + headMarker.area + '</h6>'+ 
@@ -169,21 +179,21 @@ angular.module('2015blueironhackWeiqingApp')
   	};
 
     //geo code api service call for other services
-    service.addAddressMarkers = function(addrs) {
+    service.addAddressMarkers = function(addrs, circle) {
         var _markers = [];
-        service.nextAddress(0, addrs, 100, _markers);
+        service.nextAddress(0, addrs, 100, _markers, circle);
         return _markers;
     };
 
     //should be private functions below
 
-    service.nextAddress = function(i, addrs, delay, _markers){
+    service.nextAddress = function(i, addrs, delay, _markers, circle){
 
         //delay = delay > 50 ? 50 : delay;
         console.log(delay);
         if (i < addrs.length) {
             $timeout(function() {
-                service.geocodeAddress(addrs[i].address + ' West Lafayette, IN', addrs[i],i , addrs, delay, _markers);
+                service.geocodeAddress(addrs[i].address + ' West Lafayette, IN', addrs[i],i , addrs, delay, _markers, circle);
             }, delay);
             
         }
@@ -191,7 +201,7 @@ angular.module('2015blueironhackWeiqingApp')
 
     //do not use this one, should be private
 
-    service.geocodeAddress = function(address, headerdesp, index, addrs, delay, _markers) {
+    service.geocodeAddress = function(address, headerdesp, index, addrs, delay, _markers, circle) {
 
 	    geocoder.geocode({address:address}, function (results,status)
 	      { 
@@ -200,8 +210,9 @@ angular.module('2015blueironhackWeiqingApp')
 		        	var p = results[i].geometry.location;
 			        var lat=p.lat();
 			        var lng=p.lng();
-			        service.createMarker(address,lat,lng,headerdesp, null, 101, null, _markers);
-		        }
+			        service.createMarker(address,lat,lng,headerdesp, null, 101, null, _markers, null, circle);
+		            break;
+                }
 		        //console.log(results);
                 index ++;
 	        }
@@ -221,7 +232,7 @@ angular.module('2015blueironhackWeiqingApp')
 
 	 service.initmap = function(id, myOptions){
 	 	map = new google.maps.Map(document.getElementById(id), myOptions);
-        //map.setOptions({styles: dataConfig.getMapStyle()});
+        map.setOptions({styles: dataConfig.getMapStyle()});
 	 	searchPlaces = new google.maps.places.PlacesService(map);
         infowindow = new google.maps.InfoWindow();
 
