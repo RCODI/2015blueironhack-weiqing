@@ -1,0 +1,41 @@
+1. Name of your Application
+ApartmentFinder
+
+2. Keywords
+renting, crime, safety, restaurant, park, weather, school, flood, heatmap, 
+
+
+3. Brief Description
+I developped a integrated map app to help user find future apartments. The main interface is divided into two panels. Left one is the detail panel and the right one is the google map. I mainly used angularjs as the framework, google map and d3 are used for visualization. Underscore.js is used for simplify js functions. Many angular modules are installed to achieve UI widgets.
+
+4. Features
+User can search the apartment by using the filters, there is a search box at the top of the right panel that user can input an address (google autocomplete is used), a marker and a circle will be added to the map to show the address distance range, then user can control the radius of the circle by dragging the slider (Note that the apartment markers outside the circle will still be shown for reference but the apartments inside apartment list will be removed), the rent price provides a slider and a histogram above the slider. User can refine the bedroom and filter the safety, park, restaurant...and the histogram will be changed accordingly. For each apartment in the list, user can see the detailed weighted scores, also the list can be sorted by price and weighted score. In tool tab, there are some checkbox for user to toggle the visibility of those layers and markers. (Indiana data from data.gov is used here to show flood insurance rate map) In climate tab, user can view the recent 5 year monthly temperature average and preciptation. (Data is directly parsed by calling noaa api and it may need some time to load).
+
+
+5. Test Case
+Chrome, Safari, and Firefox
+
+6. Build Case
+First do npm install, then do a bower install then do a grunt serve.
+If warning exsits, use grunt serve --force
+Dependencies: python, nodejs, grunt, grunt-cli, bower
+
+7. Description of the Datasets Used
+Monthly Crime data: 
+http://crimereports.com
+I used these data to display all the crime incidences on the map and also generate a crime heatmap based on the incidences.
+
+Apartment listing data:
+http://boilerapartments.com
+This data set is used to give the initial apartment listing with information of rent, bedroom, bathroom, area size and etc. Also a link is provided in the marker and listing to redirect to the original post of the website.
+
+Climate data:
+http://catalog.data.gov/dataset/climate-data-online-cdo
+This data is used to show the recent year climate of lafayette, min,max,mean temperature and precipitation is provided. Oringally, I planned also use the NOAA's Severe Weather Data, but it looks like their rest service is not working, I was planning to show the incidences of severe weather warnings.
+
+Indiana data for flood insurance rate:
+http://catalog.data.gov/dataset/flood-insurance-rate-maps-and-base-flood-elevations-firm-dfirm-bfe-floodplains-crosssection-df
+http://maps.indiana.edu
+This is used to show the flood insurance map to give the user a brief knowledge about flood in lafayette area and it is better to avoid living near river with high insurance rate.
+
+python codes in the directory is for crawling a website
