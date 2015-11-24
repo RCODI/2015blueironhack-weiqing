@@ -39,3 +39,6 @@ http://maps.indiana.edu
 This is used to show the flood insurance map to give the user a brief knowledge about flood in lafayette area and it is better to avoid living near river with high insurance rate.
 
 python codes in the directory is for crawling a website
+
+8. Notes
+The score for safety, park, school, restaurants...etc is currently generated randomly due to time constrains, but filter functionality is working. If have more time, will implement this in the backend to query the scores.
