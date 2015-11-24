@@ -232,7 +232,7 @@ angular.module('2015blueironhackWeiqingApp')
 
 	 service.initmap = function(id, myOptions){
 	 	map = new google.maps.Map(document.getElementById(id), myOptions);
-        map.setOptions({styles: dataConfig.getMapStyle()});
+        //map.setOptions({styles: dataConfig.getMapStyle()});
 	 	searchPlaces = new google.maps.places.PlacesService(map);
         infowindow = new google.maps.InfoWindow();
 
