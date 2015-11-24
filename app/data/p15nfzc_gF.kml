@@ -1,33 +1,14 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <kml xmlns="http://www.opengis.net/kml/2.2">
-  <Document>
-    <Style id="fb9d667661">
-      <IconStyle>
-        <scale>1</scale>
-        <Icon>
-          <href>https://raw.githubusercontent.com/RCODI/2015blueironhack-weiqing/master/app/data/flood/649.png</href>
-        </Icon>
-      </IconStyle>
-    </Style>
-    <Style id="a90b4e63fe">
-      <IconStyle>
-        <scale>1</scale>
-        <Icon>
-          <href>https://raw.githubusercontent.com/RCODI/2015blueironhack-weiqing/master/app/data/flood/648-2.png</href>
-        </Icon>
-      </IconStyle>
-    </Style>
-    <Style id="335ee54fd1">
-      <IconStyle>
-        <scale>1</scale>
-        <Icon>
-          <href>https://raw.githubusercontent.com/RCODI/2015blueironhack-weiqing/master/app/data/flood/649-2.png</href>
-        </Icon>
-      </IconStyle>
-    </Style>
-    <GroundOverlay id="5c7f583983">
-      <styleUrl>#fb9d667661</styleUrl>
-      <altitudeMode>clampToGround</altitudeMode>
+  <Folder>
+    <name>Ground Overlays</name>
+    <description>Flood insurance rate</description>
+    <GroundOverlay>
+      <name>Flood insurance rate 1</name>
+      <description>Flood insurance rate 1</description>
+      <Icon>
+        <href>https://raw.githubusercontent.com/RCODI/2015blueironhack-weiqing/master/app/data/flood/649.png</href>
+      </Icon>
       <LatLonBox>
         <north>40.5074040815363</north>
         <south>40.4298316293427</south>
@@ -35,9 +16,13 @@
         <west>-86.9308662414551</west>
       </LatLonBox>
     </GroundOverlay>
-    <GroundOverlay id="85e393297f">
-      <styleUrl>#a90b4e63fe</styleUrl>
-      <altitudeMode>clampToGround</altitudeMode>
+
+    <GroundOverlay>
+      <name>Flood insurance rate 2</name>
+      <description>Flood insurance rate 2</description>
+      <Icon>
+        <href>https://raw.githubusercontent.com/RCODI/2015blueironhack-weiqing/master/app/data/flood/648-2.png</href>
+      </Icon>
       <LatLonBox>
         <north>40.4289169417354</north>
         <south>40.3502072745374</south>
@@ -45,9 +30,13 @@
         <west>-87.0331764221191</west>
       </LatLonBox>
     </GroundOverlay>
-    <GroundOverlay id="04d64892dc">
-      <styleUrl>#335ee54fd1</styleUrl>
-      <altitudeMode>clampToGround</altitudeMode>
+
+    <GroundOverlay>
+      <name>Flood insurance rate 3</name>
+      <description>Flood insurance rate 3</description>
+      <Icon>
+        <href>https://raw.githubusercontent.com/RCODI/2015blueironhack-weiqing/master/app/data/flood/649-2.png</href>
+      </Icon>
       <LatLonBox>
         <north>40.4298969636959</north>
         <south>40.3496185668805</south>
@@ -55,6 +44,5 @@
         <west>-86.931209564209</west>
       </LatLonBox>
     </GroundOverlay>
-    
-  </Document>
+  </Folder>
 </kml>
