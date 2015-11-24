@@ -19,6 +19,13 @@ angular.module('2015blueironhackWeiqingApp')
 
       },
       controller: function($scope, $element){
+      	$scope.toggleFlood = function(){
+      		console.log('toggle');
+      		var ctaLayer = new google.maps.KmlLayer({
+			    url: 'data/p15nfzc_gF.kml',
+			    map: mapService.getmap()
+			 });
+      	};
 
       	$scope.yearSelectOptions = [
       		{text:'2014', value:'2014'},
