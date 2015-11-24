@@ -22,7 +22,7 @@ angular.module('2015blueironhackWeiqingApp')
       	$scope.toggleFlood = function(){
       		console.log('toggle');
       		var ctaLayer = new google.maps.KmlLayer({
-			    url: 'data/p15nfzc_gF.kml',
+			    url: 'https://raw.githubusercontent.com/RCODI/2015blueironhack-weiqing/master/app/data/p15nfzc_gF.kml',
 			    map: mapService.getmap()
 			 });
       	};
