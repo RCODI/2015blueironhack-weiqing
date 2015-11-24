@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://earth.google.com/kml/2.2">
+
+<Document>
+ <name>My Markers</name>
+ <Placemark>
+  <name>My Marker</name>
+  <description>My Marker description</description>
+  <Style>
+     <IconStyle> 
+          <Icon>
+                    <href>http://www.i-programmer.info/maps/IP.png</href>
+         
+         </Icon>
+     </IconStyle>
+   </Style>
+  
+  <Point>
+   <coordinates>
+    -1.5,55       
+   </coordinates>
+
+  </Point>
+
+ </Placemark>  
+ </Document>
+</kml>

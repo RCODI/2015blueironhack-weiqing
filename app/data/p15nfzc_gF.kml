@@ -15,6 +15,7 @@
         <east>-86.8292427062988</east>
         <west>-86.9308662414551</west>
       </LatLonBox>
+      <color>55ffffff</color>
     </GroundOverlay>
 
     <GroundOverlay>
@@ -29,6 +30,7 @@
         <east>-86.9306945800781</east>
         <west>-87.0331764221191</west>
       </LatLonBox>
+      <color>55ffffff</color>
     </GroundOverlay>
 
     <GroundOverlay>
@@ -43,6 +45,7 @@
         <east>-86.8288993835449</east>
         <west>-86.931209564209</west>
       </LatLonBox>
+      <color>55ffffff</color>
     </GroundOverlay>
   </Folder>
 </kml>

@@ -19,12 +19,24 @@ angular.module('2015blueironhackWeiqingApp')
 
       },
       controller: function($scope, $element){
+      	$scope.displayFloodLayer = false;
+      	$scope.floodLayer = null;
+
       	$scope.toggleFlood = function(){
-      		console.log('toggle');
-      		var ctaLayer = new google.maps.KmlLayer({
-			    url: 'https://raw.githubusercontent.com/RCODI/2015blueironhack-weiqing/master/app/data/p15nfzc_gF.kml',
-			    map: mapService.getmap()
-			 });
+      		
+      		if ($scope.displayFloodLayer === false){
+      			$scope.displayFloodLayer = true;
+	      		$scope.floodLayer = new google.maps.KmlLayer({
+				    url: 'https://raw.githubusercontent.com/RCODI/2015blueironhack-weiqing/master/app/data/p15nfzc_gF.kml',
+				    map: mapService.getmap()
+				});
+      		}else{
+      			$scope.displayFloodLayer = false;
+      			$scope.floodLayer.setMap(null);
+      		}
+      		
+
+
       	};
 
       	$scope.yearSelectOptions = [

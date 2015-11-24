@@ -329,6 +329,7 @@ For google map*/
   width:100%;
   height:400px;
 }
+
 .solidArc:hover {
   fill: orangered ;
 }

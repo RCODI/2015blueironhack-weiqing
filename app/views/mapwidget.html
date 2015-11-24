@@ -115,8 +115,17 @@
 
 <div id="tools" class="checkbox tab-pane fade">
   <br>
+  <h5>Flood Insurance Rate Maps</h5>
+  <p style="color:#aaa">Shows floodplains and flood hazard areas, derived from FEMA Flood Rate Insurance Maps (FIRM). The FIRM are the basis for floodplain management, mitigation, and insurance activities for the National Flood Insurance Program (NFIP). The Digital Flood Insurance Rate Map (DFIRM) Database is derived from Flood Insurance Studies (FIS), previously published Flood Insurance Rate Maps (FIRM), flood hazard analyses performed in support of the FIS's and FIRM's, and new mapping data, where available. This database is an interim version of the DFIRM Database and does not fully meet all DFIRM specifications. Updated data were supplied by Indiana Department of Natural Resources (IDNR) personnel on May 19, 2015.</p>
+  <ul>
+    <li>
+    <input type="checkbox" ng-click="toggleFlood()">Show Flood Plain Layer
+    </li>
+  </ul>
+
   
   <h5>Heatmap</h5>
+  <p style="color:#aaa">This checkbox will toggle the heatmap for Crime incidences based on all the data in three months (November, October and September). Data used are parsed from http://crimereports.com</p>
   <ul>
     <li>
     <input  type="checkbox" ng-click="showHeatMap()">Show Crime Heatmap
@@ -162,7 +171,6 @@
 
     </div>
 
-    <input type="checkbox" ng-click="toggleFlood()">Show Flood Plain Layer
 
 
   </div>
