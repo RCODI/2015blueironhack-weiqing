@@ -19,7 +19,7 @@ angular.module('2015blueironhackWeiqingApp')
   	
     var searchPlaces;
 
-    var iconBase = 'images/mapiconscollection-markers/';
+    var iconBase = 'https://raw.githubusercontent.com/RCODI/2015blueironhack-weiqing/master/app/images/mapiconscollection-markers/';
 
     var markers = [];
 

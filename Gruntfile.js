@@ -371,7 +371,36 @@ module.exports = function (grunt) {
     // Copies remaining files to places other tasks can use
     copy: {
       dist: {
-        files: [{
+        files: [
+        {
+          expand: true,
+          cwd: '<%= yeoman.app %>/data',
+          dest: '<%= yeoman.dist %>/data',
+          src: ['**']
+        },
+
+        {
+          expand: true,
+          cwd: 'bower_components/d3',
+          src: ['**'],
+          dest: '<%= yeoman.dist %>/bower_components/d3'
+        },
+
+        {
+          expand: true,
+          cwd: 'bower_components/font-awesome/',
+          src: ['**'],
+          dest: '<%= yeoman.dist %>/bower_components/font-awesome/'
+        },
+
+        {
+          expand: true,
+          cwd: 'bower_components/angular-chart.js/dist/',
+          src: ['**'],
+          dest: '<%= yeoman.dist %>/bower_components/angular-chart.js/dist/'
+        },
+
+        {
           expand: true,
           dot: true,
           cwd: '<%= yeoman.app %>',
@@ -497,4 +526,5 @@ module.exports = function (grunt) {
   ]);
 
   grunt.loadNpmTasks('grunt-build-control');
+  grunt.loadNpmTasks('grunt-contrib-copy');
 };
